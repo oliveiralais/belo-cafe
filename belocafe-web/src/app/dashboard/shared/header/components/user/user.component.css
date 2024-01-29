@@ -1,0 +1,54 @@
+.user-container {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.user-greeting-accent {
+  font-weight: bold;
+}
+
+.user-icon-button {
+  margin-right: 12px;
+}
+
+.user-menu-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-menu-title-name {
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.user-menu-title-property {
+  color: #689F38;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.user-menu-item:hover, .user-menu-item:hover .user-menu-icon {
+  color: #689F38;
+}
+
+.signout-button-wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.signout-button {
+  border: 2px solid #689F38;
+  color: #689F38 !important;
+}
+
+@media (max-width: 900px){
+  .user-greeting{
+    display: none;
+  }
+}

@@ -1,0 +1,92 @@
+<div class="container">
+  <mat-card class="signin-card">
+    <mat-card-header>
+      <mat-card-title>
+        <span class="signin-card-title">
+          <mat-icon class="signin-card-title-icon">coffee</mat-icon>
+          Belo Café - ERP
+        </span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Preencha o formulário abaixo para efetuar seu cadastro</p>
+      <form class="signin-form" [formGroup]="signupFormGroup" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+          <mat-label>Nome completo</mat-label>
+          <input matInput placeholder="Seu nome completo" name="name" formControlName="name" required>
+
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('name')?.errors?.['minlength']">Mínimo de 6 caracteres.</mat-hint>
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('name')?.errors?.['maxlength']">Máximo de 100 caracteres.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Nome da sua propriedade</mat-label>
+          <input matInput placeholder="Fazenda XYZ" name="property" formControlName="propertyName" required>
+
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('propertyName')?.errors?.['minlength']">Mínimo de 10 caracteres.</mat-hint>
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('propertyName')?.errors?.['maxlength']">Máximo de 200 caracteres.</mat-hint>
+        </mat-form-field>
+
+        <div class="city-state-container">
+          <mat-form-field class="uf-input">
+            <mat-label>Estado</mat-label>
+            <mat-select (selectionChange)="handleStateSelection()" matInput name="uf" formControlName="uf" required>
+              <mat-option *ngFor="let state of states" [value]="state"> {{state.nome}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="city-input">
+            <mat-label>Cidade</mat-label>
+            <mat-select matInput name="city" required formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city.nome"> {{city.nome}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width">
+          <mat-label>CPF/CNPJ</mat-label>
+          <input matInput placeholder="XXX.XXX.XXX-XX ou XXX.XXX.XXX-0001/XX" name="cpf_cnpj" formControlName="cpfCnpj" required>
+
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('cpfCnpj')?.errors?.['minlength']">Mínimo de 14 caracteres.</mat-hint>
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('cpfCnpj')?.errors?.['maxlength']">Máximo de 18 caracteres.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Endereço de email</mat-label>
+          <input matInput placeholder="email@dominio.com" name="email" formControlName="email" required>
+
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('email')?.errors?.['minlength']">Mínimo de 6 caracteres.</mat-hint>
+          <mat-hint class="text-danger" *ngIf="signupFormGroup.get('email')?.errors?.['maxlength']">Máximo de 100 caracteres.</mat-hint>
+        </mat-form-field>
+
+        <div class="password-container">
+          <mat-form-field class="password-input">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" placeholder="******" name="password" formControlName="password" required>
+            <mat-icon matSuffix>key</mat-icon>
+
+            <mat-hint class="text-danger" *ngIf="signupFormGroup.get('password')?.errors?.['minlength']">Mínimo de 5 caracteres.</mat-hint>
+            <mat-hint class="text-danger" *ngIf="signupFormGroup.get('password')?.errors?.['maxlength']">Máximo de 100 caracteres.</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="password-input">
+            <mat-label>Confirmar Senha</mat-label>
+            <input matInput type="password" placeholder="******" name="confirm_password" formControlName="confirmPassword" required>
+            <mat-icon matSuffix>key</mat-icon>
+
+            <mat-hint class="text-danger" *ngIf="signupFormGroup.get('confirmPassword')?.errors?.['minlength']">Mínimo de 5 caracteres.</mat-hint>
+            <mat-hint class="text-danger" *ngIf="signupFormGroup.get('confirmPassword')?.errors?.['maxlength']">Máximo de 100 caracteres.</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit">Concluir Cadastro</button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="actions-container">
+        <a mat-button routerLink="/signin">Já é cadastrado na plataforma?</a>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

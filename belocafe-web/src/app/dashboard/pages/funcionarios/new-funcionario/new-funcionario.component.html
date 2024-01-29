@@ -1,0 +1,148 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/funcionarios" class="page-subtitle"
+    >Gerenciamento de Funcionário</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/funcionarios/new" class="page-subtitle"
+    >Registrar Novo Funcionário</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">engineering</mat-icon>
+        Registro de Funcionario
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="funcionarioFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Nome do Funcionario</mat-label>
+        <input
+          matInput
+          placeholder="Nome do Funcionario"
+          type="text"
+          formControlName="nome"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="funcionarioFormGroup.get('nome')?.errors?.['required'] && funcionarioFormGroup.get('nome')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="funcionarioFormGroup.get('nome')?.errors?.['minlength'] && funcionarioFormGroup.get('nome')?.touched"
+          >Mínimo de 5 caracteres.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="funcionarioFormGroup.get('nome')?.errors?.['maxlength'] && funcionarioFormGroup.get('nome')?.touched"
+          >Máximo de 100 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            placeholder="000.000.000-00"
+            type="text"
+            formControlName="cpf"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('cpf')?.errors?.['required'] && funcionarioFormGroup.get('cpf')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('cpf')?.errors?.['minlength'] && funcionarioFormGroup.get('cpf')?.touched"
+            >Mínimo de 14 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('cpf')?.errors?.['maxlength'] && funcionarioFormGroup.get('cpf')?.touched"
+            >Máximo de 14 caracteres.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Telefone</mat-label>
+          <input
+            matInput
+            placeholder="(00) 00000-0000"
+            type="text"
+            formControlName="telefone"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Função</mat-label>
+          <input
+            matInput
+            placeholder="Ex: Operador de Máquinas"
+            type="text"
+            formControlName="funcao"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('funcao')?.errors?.['required'] && funcionarioFormGroup.get('funcao')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('funcao')?.errors?.['minlength'] && funcionarioFormGroup.get('funcao')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('funcao')?.errors?.['maxlength'] && funcionarioFormGroup.get('funcao')?.touched"
+            >Máximo de 50 caracteres.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Salário</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 1200.00"
+            type="text"
+            formControlName="salario"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('salario')?.errors?.['required'] && funcionarioFormGroup.get('salario')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="funcionarioFormGroup.get('salario')?.errors?.['min'] && funcionarioFormGroup.get('salario')?.touched"
+            >O valor inserido deve ser maior ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Cadastrar Funcionário
+        </button>
+        <a mat-raised-button color="primary" href="/dashboard/funcionarios"
+          >Cancelar</a
+        >
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

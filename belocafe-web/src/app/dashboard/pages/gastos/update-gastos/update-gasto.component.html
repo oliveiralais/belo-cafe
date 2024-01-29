@@ -1,0 +1,200 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/gastos" class="page-subtitle"
+    >Gerenciamento de Gastos</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/gastos/update" class="page-subtitle"
+    >Editar Documento</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">construction</mat-icon>
+        Edição de Documentos
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="gastoFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Tipo do Documento</mat-label>
+        <input
+          matInput
+          placeholder="Nota Fiscal, Recibo, ..."
+          type="text"
+          formControlName="type"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('type')?.errors?.['required'] && gastoFormGroup.get('type')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('type')?.errors?.['minlength'] && gastoFormGroup.get('type')?.touched"
+          >Mínimo de 3 caracteres.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('type')?.errors?.['maxlength'] && gastoFormGroup.get('type')?.touched"
+          >Máximo de 100 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Código do Documento</mat-label>
+        <input
+          matInput
+          placeholder="Código do Documento"
+          type="number"
+          formControlName="code"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('code')?.errors?.['required'] && gastoFormGroup.get('code')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('code')?.errors?.['min'] && gastoFormGroup.get('code')?.touched"
+          >Mínimo de 3 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Descrição</mat-label>
+          <input
+            matInput
+            placeholder="Descrição do Documento/Gasto"
+            type="text"
+            formControlName="description"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('description')?.errors?.['required'] && gastoFormGroup.get('description')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('description')?.errors?.['minlength'] && gastoFormGroup.get('description')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('description')?.errors?.['maxlength'] && gastoFormGroup.get('description')?.touched"
+            >Máximo de 255 caracteres.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Valor Total</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 2000.00"
+            type="number"
+            formControlName="amount"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('amount')?.errors?.['required'] && gastoFormGroup.get('amount')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('amount')?.errors?.['min'] && gastoFormGroup.get('amount')?.touched"
+            >O valor inserido deve ser maior ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Data de Emissão</mat-label>
+        <input
+          matInput
+          placeholder="Data de Emissão"
+          type="date"
+          formControlName="issueDate"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="gastoFormGroup.get('issueDate')?.errors?.['required'] && gastoFormGroup.get('issueDate')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Nome/Razão Social</mat-label>
+          <input
+            matInput
+            placeholder="Nome/Razão Social"
+            type="text"
+            formControlName="name"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('name')?.errors?.['required'] && gastoFormGroup.get('name')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('description')?.errors?.['minlength'] && gastoFormGroup.get('description')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('description')?.errors?.['maxlength'] && gastoFormGroup.get('description')?.touched"
+            >Máximo de 255 caracteres.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>CPF/CNPJ</mat-label>
+          <input
+            matInput
+            placeholder="XXX.XXX.XXX-XX ou XXX.XXX.XXX-0001/XX"
+            type="text"
+            formControlName="cpfCnpj"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('cpfCnpj')?.errors?.['required'] && gastoFormGroup.get('cpfCnpj')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('cpfCnpj')?.errors?.['minlength'] && gastoFormGroup.get('cpfCnpj')?.touched"
+            >Mínimo de 14 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="gastoFormGroup.get('cpfCnpj')?.errors?.['maxlength'] && gastoFormGroup.get('cpfCnpj')?.touched"
+            >Máximo de 18 caracteres.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Confirmar Edição
+        </button>
+        <a mat-raised-button color="primary" href="/dashboard/gastos"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

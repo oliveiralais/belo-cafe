@@ -1,0 +1,56 @@
+<div class="selection-dialog">
+  <h2 class="page-title">Seleção de Máquinas</h2>
+
+  <div class="table-container">
+    <mat-table [dataSource]="data.maquinas">
+      <!-- Coluna de seleção -->
+      <ng-container matColumnDef="selecionar">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="toggleAllSelection($event)"
+            [checked]="verifyAllSelection()"
+          ></mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let maquina">
+          <mat-checkbox
+            (change)="toggleSelection(maquina)"
+            [checked]="verifySelection(maquina)"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Outras colunas -->
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let maquina">{{ maquina.nome }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="anoFabricacao">
+        <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+        <mat-cell *matCellDef="let maquina">{{
+          maquina.anoFabricacao
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="manutencao">
+        <mat-header-cell *matHeaderCellDef>Manutenção</mat-header-cell>
+        <mat-cell *matCellDef="let maquina"
+          >{{
+            maquina.manutencao.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Adicione mais colunas conforme necessário -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="actions selection-dialog-actions">
+    <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+  </div>
+</div>

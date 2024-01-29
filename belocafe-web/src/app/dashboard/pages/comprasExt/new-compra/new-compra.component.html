@@ -1,0 +1,186 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Financeiro</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/glebas" class="page-subtitle"
+    >Gerenciamento de Compras Extraordinárias</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/glebas/new" class="page-subtitle"
+    >Registrar Nova Compra Extraordinária</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">shopping_bag</mat-icon>
+        Registro de Compra Extraordinária
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="compraFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Título da Compra</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: Troca de óleo"
+          type="text"
+          formControlName="titulo"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('titulo')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('titulo')?.errors?.['maxlength'] && compraFormGroup.get('titulo')?.touched"
+          >Máximo de 20 caracteres.
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Descrição da Compra</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: Troca de óleo de caminhonete no posto Azul de ..."
+          type="text"
+          formControlName="descricao"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('descricao')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('descricao')?.errors?.['maxlength'] && compraFormGroup.get('titulo')?.touched"
+          >Máximo de 50 caracteres.
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Data da Compra</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: 10/11/2023"
+          pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}"
+          type="text"
+          formControlName="data"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['pattern'] && compraFormGroup.get('titulo')?.touched"
+          >O formato da data deve ser DD/MM/AAAA
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Código</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: 99 12345 12345 5"
+          pattern="[0-9]{2}\ [0-9]{5}\ [0-9]{5}\ [0-9]"
+          type="text"
+          formControlName="codigo"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['pattern'] && compraFormGroup.get('titulo')?.touched"
+          >O formato do campo deve ser: 00 00000 00000 0
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Valor da Compra</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: R$ 1000,00"
+          type="text"
+          formControlName="valor"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Nome / Razão Social</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: Fulano da Silva"
+          type="text"
+          formControlName="razaoSocial"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>CPF / CNPJ</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: 123.456.678-90"
+          pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}"
+          type="text"
+          formControlName="cpfCnpj"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['required'] && compraFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="compraFormGroup.get('data')?.errors?.['pattern'] && compraFormGroup.get('titulo')?.touched"
+          >O formato do campo deve ser: 000.000.000-00
+        </mat-hint>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Cadastrar Compra
+        </button>
+        <a mat-raised-button color="primary" href="/dashboard/compras">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

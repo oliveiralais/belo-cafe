@@ -1,0 +1,213 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/calagens" class="page-subtitle"
+    >Gerenciamento de Calagens</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/calagens/update" class="page-subtitle"
+    >Editar Calagem</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">compost</mat-icon>
+        Edição de Calagem
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="calagemFormGroup" (submit)="onSubmit()">
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Tipo do Calcário</mat-label>
+          <input
+            matInput
+            placeholder="Tipo do Calcário"
+            type="text"
+            formControlName="tipoCalcario"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('tipoCalcario')?.errors?.['required'] && calagemFormGroup.get('tipoCalcario')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('tipoCalcario')?.errors?.['minlength'] && calagemFormGroup.get('tipoCalcario')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('tipoCalcario')?.errors?.['maxlength'] && calagemFormGroup.get('tipoCalcario')?.touched"
+            >Máximo de 100 caracteres.</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Quantidade de Calcário (kg)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10"
+            type="text"
+            formControlName="qtdeCalcario"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('qtdeCalcario')?.errors?.['required'] && calagemFormGroup.get('qtdeCalcario')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('qtdeCalcario')?.errors?.['min'] && calagemFormGroup.get('qtdeCalcario')?.touched"
+            >O valor inserido deve ser menor ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Despesas Extras (R$)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10000"
+            type="text"
+            formControlName="despesasExtras"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('despesasExtras')?.errors?.['min'] && calagemFormGroup.get('despesasExtras')?.touched"
+            >O valor inserido deve ser menor ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Status</mat-label>
+          <mat-select
+            matInput
+            name="statusAtividade"
+            formControlName="statusAtividade"
+            required
+          >
+            <mat-option
+              *ngFor="let statusAtividade of statusAtividades"
+              [value]="statusAtividade"
+            >
+              {{ statusAtividade.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('statusAtividade')?.errors?.['required'] && calagemFormGroup.get('statusAtividade')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Início</mat-label>
+          <input matInput type="date" formControlName="dataInicio" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('dataInicio')?.errors?.['required'] && calagemFormGroup.get('dataInicio')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Fim</mat-label>
+          <input matInput type="date" formControlName="dataFim" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="calagemFormGroup.get('dataFim')?.errors?.['required'] && calagemFormGroup.get('dataFim')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width form-inline-field">
+        <mat-label>Local</mat-label>
+        <mat-select matInput name="local" formControlName="local" required>
+          <mat-option *ngFor="let local of glebas" [value]="local">
+            {{ local.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint
+          class="text-danger"
+          *ngIf="calagemFormGroup.get('local')?.errors?.['required'] && calagemFormGroup.get('local')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="selection-container">
+        <mat-label>Funcionários</mat-label>
+        <ul>
+          <li *ngFor="let funcionario of funcionarios">
+            {{ funcionario.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openFuncionarioDialog($event)">
+          Selecionar Funcionários
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Máquinas</mat-label>
+        <ul>
+          <li *ngFor="let maquina of maquinas">
+            {{ maquina.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openMaquinaDialog($event)">
+          Selecionar Máquinas
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Equipamentos</mat-label>
+        <ul>
+          <li *ngFor="let equipamento of equipamentos">
+            {{ equipamento.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openEquipamentoDialog($event)">
+          Selecionar Equipamentos
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Veículos</mat-label>
+        <ul>
+          <li *ngFor="let veiculo of veiculos">
+            {{ veiculo.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openVeiculoDialog($event)">
+          Selecionar Veículos
+        </button>
+      </div>
+
+      <mat-form-field class="full-width form-inline-field">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="observacoes"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Editar Calagem
+        </button>
+        <a
+          mat-raised-button
+          color="primary"
+          href="/dashboard/atividades/calagens"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,17 @@
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  background-color: rgb(31, 22, 20);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 16px;
+  width: 200px;
+}
+
+.search-input:focus {
+  outline: none;
+}

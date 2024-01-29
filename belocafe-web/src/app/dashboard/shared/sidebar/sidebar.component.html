@@ -1,0 +1,237 @@
+<mat-nav-list>
+  <mat-list-item routerLink="#">
+    <mat-icon matListItemIcon>account_circle</mat-icon>
+    <span matListItemTitle>Meu Perfil</span>
+  </mat-list-item>
+  <mat-list-item routerLink="">
+    <mat-icon matListItemIcon>home</mat-icon>
+    <span matListItemTitle>Dashboard</span>
+  </mat-list-item>
+  <mat-list-item routerLink="#">
+    <mat-icon matListItemIcon>help</mat-icon>
+    <span matListItemTitle>Ajuda</span>
+  </mat-list-item>
+</mat-nav-list>
+
+<mat-divider class="sidebar-divider"></mat-divider>
+
+<mat-nav-list>
+  <p class="sidebar-title">Financeiro</p>
+
+  <mat-list-item (click)="showBudgets = !showBudgets" class="parent">
+    <mat-icon matListItemIcon>account_balance_wallet</mat-icon>
+    <span matListItemTitle class="submenu-title">
+      Orçamentos
+      <mat-icon class="menu-button" [ngClass]="{ rotated: showBudgets }"
+        >expand_more</mat-icon
+      >
+    </span>
+  </mat-list-item>
+
+  <div
+    class="submenu"
+    [ngClass]="{ expanded: showBudgets }"
+    *ngIf="showBudgets"
+  >
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Previsto</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Realizado</span>
+    </mat-list-item>
+  </div>
+
+  <mat-list-item (click)="showEntries = !showEntries" class="parent">
+    <mat-icon matListItemIcon>currency_exchange</mat-icon>
+    <span matListItemTitle class="submenu-title">
+      Lançamentos
+      <mat-icon class="menu-button" [ngClass]="{ rotated: showEntries }"
+        >expand_more</mat-icon
+      >
+    </span>
+  </mat-list-item>
+
+  <div
+    class="submenu"
+    [ngClass]="{ expanded: showEntries }"
+    *ngIf="showEntries"
+  >
+    <mat-list-item class="submenu-item" routerLink="gastos">
+      <span matListItemTitle>Gastos</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="compras">
+      <span matListItemTitle>Compras</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="vendas">
+      <span matListItemTitle>Vendas</span>
+    </mat-list-item>
+  </div>
+
+  <mat-list-item routerLink="#">
+    <mat-icon matListItemIcon>point_of_sale</mat-icon>
+    <span matListItemTitle>Fluxo de Caixa</span>
+  </mat-list-item>
+
+  <mat-list-item routerLink="#">
+    <mat-icon matListItemIcon>attach_money</mat-icon>
+    <span matListItemTitle>Balanço / Gleba</span>
+  </mat-list-item>
+
+  <mat-list-item
+    (click)="showFinancialSummary = !showFinancialSummary"
+    class="parent"
+  >
+    <mat-icon matListItemIcon>summarize</mat-icon>
+    <span matListItemTitle class="submenu-title">
+      Relatórios
+      <mat-icon
+        class="menu-button"
+        [ngClass]="{ rotated: showFinancialSummary }"
+        >expand_more</mat-icon
+      >
+    </span>
+  </mat-list-item>
+
+  <div
+    class="submenu"
+    [ngClass]="{ expanded: showFinancialSummary }"
+    *ngIf="showFinancialSummary"
+  >
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Compras</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Vendas</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Contas a Pagar</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Contas a Receber</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Custos / Gleba</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Receitas / Gleba</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="#">
+      <span matListItemTitle>Balanço Patrimonial</span>
+    </mat-list-item>
+  </div>
+</mat-nav-list>
+
+<mat-divider class="sidebar-divider"></mat-divider>
+
+<mat-nav-list>
+  <p class="sidebar-title">Produção</p>
+
+  <mat-list-item routerLink="glebas">
+    <mat-icon matListItemIcon>grass</mat-icon>
+    <span matListItemTitle>Glebas</span>
+  </mat-list-item>
+
+  <mat-list-item routerLink="funcionarios">
+    <mat-icon matListItemIcon>engineering</mat-icon>
+    <span matListItemTitle>Funcionários</span>
+  </mat-list-item>
+
+  <mat-list-item routerLink="insumos">
+    <mat-icon matListItemIcon>compost</mat-icon>
+    <span matListItemTitle>Insumos</span>
+  </mat-list-item>
+
+  <mat-list-item (click)="showActivities = !showActivities" class="parent">
+    <mat-icon matListItemIcon>calendar_month</mat-icon>
+    <span matListItemTitle class="submenu-title">
+      Atividades
+      <mat-icon class="menu-button" [ngClass]="{ rotated: showActivities }"
+        >expand_more</mat-icon
+      >
+    </span>
+  </mat-list-item>
+
+  <div
+    class="submenu"
+    [ngClass]="{ expanded: showActivities }"
+    *ngIf="showActivities"
+  >
+    <mat-list-item class="submenu-item" routerLink="atividades/plantios">
+      <span matListItemTitle>Plantio</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/adubacoes">
+      <span matListItemTitle>Adubação</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/pulverizacoes">
+      <span matListItemTitle>Pulverização</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/calagens">
+      <span matListItemTitle>Calagem</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/colheitas">
+      <span matListItemTitle>Colheita</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/beneficiamentos">
+      <span matListItemTitle>Beneficiamento</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="atividades/irrigacoes">
+      <span matListItemTitle>Irrigação</span>
+    </mat-list-item>
+  </div>
+
+  <mat-list-item routerLink="relatorios/atividades-gleba">
+    <mat-icon matListItemIcon>summarize</mat-icon>
+    <span matListItemTitle>Rel. Atividades</span>
+  </mat-list-item>
+</mat-nav-list>
+
+<mat-divider class="sidebar-divider"></mat-divider>
+
+<mat-nav-list>
+  <p class="sidebar-title">Máquinas</p>
+
+  <mat-list-item routerLink="maquinas">
+    <mat-icon matListItemIcon>agriculture</mat-icon>
+    <span matListItemTitle>Máquinas</span>
+  </mat-list-item>
+
+  <mat-list-item routerLink="equipamentos">
+    <mat-icon matListItemIcon>construction</mat-icon>
+    <span matListItemTitle>Equipamentos</span>
+  </mat-list-item>
+
+  <mat-list-item routerLink="veiculos">
+    <mat-icon matListItemIcon>directions_car</mat-icon>
+    <span matListItemTitle>Veículos</span>
+  </mat-list-item>
+
+  <mat-list-item
+    (click)="showMachineSummaries = !showMachineSummaries"
+    class="parent"
+  >
+    <mat-icon matListItemIcon>summarize</mat-icon>
+    <span matListItemTitle class="submenu-title">
+      Rel. Atividades
+      <mat-icon
+        class="menu-button"
+        [ngClass]="{ rotated: showMachineSummaries }"
+        >expand_more</mat-icon
+      >
+    </span>
+  </mat-list-item>
+
+  <div
+    [ngClass]="{ expanded: showMachineSummaries }"
+    *ngIf="showMachineSummaries"
+  >
+    <mat-list-item class="submenu-item" class="submenu-item" routerLink="relatorios/atividades-maquina">
+      <span matListItemTitle>Atv. / Máquina</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="relatorios/atividades-equipamento">
+      <span matListItemTitle>Atv. / Equipamento</span>
+    </mat-list-item>
+    <mat-list-item class="submenu-item" routerLink="relatorios/atividades-veiculo">
+      <span matListItemTitle>Atv. / Veículo</span>
+    </mat-list-item>
+  </div>
+</mat-nav-list>

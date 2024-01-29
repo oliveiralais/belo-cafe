@@ -1,0 +1,21 @@
+
+.footer-links a{
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  margin-right: 25px;
+}
+
+.footer-links a:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 600px){
+  .footer-links {
+    display: none;
+  }
+
+  .footer-copyright {
+    margin: auto;
+  }
+}

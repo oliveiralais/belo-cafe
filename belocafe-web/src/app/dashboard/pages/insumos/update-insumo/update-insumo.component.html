@@ -1,0 +1,222 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/insumos" class="page-subtitle"
+    >Gerenciamento de Insumos</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <span class="page-subtitle">Editar Dados do Insumo</span>
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">compost</mat-icon>
+        Edição de Insumo
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="insumoFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Nome do Insumo</mat-label>
+        <input
+          matInput
+          placeholder="Nome do Insumo"
+          type="text"
+          formControlName="nome"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('nome')?.errors?.['required'] && insumoFormGroup.get('nome')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('nome')?.errors?.['minlength'] && insumoFormGroup.get('nome')?.touched"
+          >Mínimo de 5 caracteres.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('nome')?.errors?.['maxlength'] && insumoFormGroup.get('nome')?.touched"
+          >Máximo de 100 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Tipo do Insumo</mat-label>
+          <mat-select
+            (selectionChange)="handleTipoSelection()"
+            matInput
+            name="tipoInsumo"
+            formControlName="tipoInsumo"
+            required
+          >
+            <mat-option *ngFor="let tipo of tiposInsumo" [value]="tipo">
+              {{ tipo.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Detalhamento do Tipo</mat-label>
+          <input
+            matInput
+            placeholder="Em caso de outro, especifique"
+            type="text"
+            formControlName="detalhamentoTipo"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('detalhamentoTipo')?.errors?.['required'] && insumoFormGroup.get('detalhamentoTipo')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('detalhamentoTipo')?.errors?.['minlength'] && insumoFormGroup.get('detalhamentoTipo')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('detalhamentoTipo')?.errors?.['maxlength'] && insumoFormGroup.get('detalhamentoTipo')?.touched"
+            >Máximo de 100 caracteres.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Alvo</mat-label>
+        <input
+          matInput
+          placeholder="Alvo/Objetivo do Insumo"
+          type="text"
+          formControlName="alvo"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('alvo')?.errors?.['required'] && insumoFormGroup.get('alvo')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('alvo')?.errors?.['minlength'] && insumoFormGroup.get('alvo')?.touched"
+          >Mínimo de 3 caracteres.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="insumoFormGroup.get('alvo')?.errors?.['maxlength'] && insumoFormGroup.get('alvo')?.touched"
+          >Máximo de 100 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Unidade</mat-label>
+          <input
+            matInput
+            placeholder="L, Kg, g, etc."
+            type="text"
+            formControlName="unidade"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('unidade')?.errors?.['required'] && insumoFormGroup.get('unidade')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('unidade')?.errors?.['minlength'] && insumoFormGroup.get('unidade')?.touched"
+            >Mínimo de 1 caracter.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('unidade')?.errors?.['maxlength'] && insumoFormGroup.get('unidade')?.touched"
+            >Máximo de 20 caracteres.</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Valor/un.</mat-label>
+          <input
+            matInput
+            placeholder="1.5"
+            type="text"
+            formControlName="valor"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('valor')?.errors?.['required'] && insumoFormGroup.get('valor')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('valor')?.errors?.['min'] && insumoFormGroup.get('valor')?.touched"
+            >O valor inserido deve ser maior do que 0.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Princípio Ativo</mat-label>
+          <input
+            matInput
+            placeholder="Princípio Ativo do Insumo"
+            type="text"
+            formControlName="principioAtivo"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('principioAtivo')?.errors?.['required'] && insumoFormGroup.get('principioAtivo')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('principioAtivo')?.errors?.['minlength'] && insumoFormGroup.get('principioAtivo')?.touched"
+            >Mínimo de 3 caracteres.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('principioAtivo')?.errors?.['maxlength'] && insumoFormGroup.get('principioAtivo')?.touched"
+            >Máximo de 100 caracteres.</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Quantidade adquirida</mat-label>
+          <input
+            matInput
+            placeholder="10"
+            type="number"
+            formControlName="quantidadeAdquirida"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('quantidadeAdquirida')?.errors?.['required'] && insumoFormGroup.get('quantidadeAdquirida')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="insumoFormGroup.get('quantidadeAdquirida')?.errors?.['min'] && insumoFormGroup.get('quantidadeAdquirida')?.touched"
+            >O valor inserido deve ser maior do que 0.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Confirmar Edição
+        </button>
+        <a mat-raised-button color="primary" href="/dashboard/insumos"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

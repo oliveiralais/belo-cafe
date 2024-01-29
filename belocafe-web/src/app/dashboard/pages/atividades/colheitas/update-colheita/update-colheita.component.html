@@ -1,0 +1,240 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/colheitas" class="page-subtitle"
+    >Gerenciamento de Colheitas</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/colheitas/update" class="page-subtitle"
+    >Editar Colheita</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">compost</mat-icon>
+        Editar Colheita
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="colheitaFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Tipo da Colheita</mat-label>
+        <input
+          matInput
+          placeholder="Tipo da Colheita"
+          type="text"
+          formControlName="tipoColheita"
+          required
+        />
+        <mat-hint
+          class="text-danger"
+          *ngIf="colheitaFormGroup.get('tipoColheita')?.errors?.['required'] && colheitaFormGroup.get('tipoColheita')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="colheitaFormGroup.get('tipoColheita')?.errors?.['minlength'] && colheitaFormGroup.get('tipoColheita')?.touched"
+          >Mínimo de 3 caracteres.</mat-hint
+        >
+        <mat-hint
+          class="text-danger"
+          *ngIf="colheitaFormGroup.get('tipoColheita')?.errors?.['maxlength'] && colheitaFormGroup.get('tipoColheita')?.touched"
+          >Máximo de 100 caracteres.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Massa Colhida (kg)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10000"
+            type="text"
+            formControlName="massaColhida"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('massaColhida')?.errors?.['required'] && colheitaFormGroup.get('massaColhida')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('massaColhida')?.errors?.['min'] && colheitaFormGroup.get('massaColhida')?.touched"
+            >O valor inserido deve ser menor ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Rendimento (%)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 89%"
+            type="text"
+            formControlName="rendimento"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('rendimento')?.errors?.['required'] && colheitaFormGroup.get('rendimento')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('rendimento')?.errors?.['min'] && colheitaFormGroup.get('rendimento')?.touched"
+            >O valor inserido deve ser maior ou igual a 0.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('rendimento')?.errors?.['max'] && colheitaFormGroup.get('rendimento')?.touched"
+            >O valor inserido deve ser menor ou igual a 100.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Despesas Extras (R$)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10000"
+            type="text"
+            formControlName="despesasExtras"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('despesasExtras')?.errors?.['min'] && colheitaFormGroup.get('despesasExtras')?.touched"
+            >O valor inserido deve ser menor ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Status</mat-label>
+          <mat-select
+            matInput
+            name="statusAtividade"
+            formControlName="statusAtividade"
+            required
+          >
+            <mat-option
+              *ngFor="let statusAtividade of statusAtividades"
+              [value]="statusAtividade"
+            >
+              {{ statusAtividade.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('statusAtividade')?.errors?.['required'] && colheitaFormGroup.get('statusAtividade')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Início</mat-label>
+          <input matInput type="date" formControlName="dataInicio" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('dataInicio')?.errors?.['required'] && colheitaFormGroup.get('dataInicio')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Fim</mat-label>
+          <input matInput type="date" formControlName="dataFim" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="colheitaFormGroup.get('dataFim')?.errors?.['required'] && colheitaFormGroup.get('dataFim')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width form-inline-field">
+        <mat-label>Local</mat-label>
+        <mat-select matInput name="local" formControlName="local" required>
+          <mat-option *ngFor="let local of glebas" [value]="local">
+            {{ local.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint
+          class="text-danger"
+          *ngIf="colheitaFormGroup.get('local')?.errors?.['required'] && colheitaFormGroup.get('local')?.touched"
+          >Campo obrigatório.</mat-hint
+        >
+      </mat-form-field>
+
+      <div class="selection-container">
+        <mat-label>Funcionários</mat-label>
+        <ul>
+          <li *ngFor="let funcionario of funcionarios">
+            {{ funcionario.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openFuncionarioDialog($event)">
+          Selecionar Funcionários
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Máquinas</mat-label>
+        <ul>
+          <li *ngFor="let maquina of maquinas">
+            {{ maquina.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openMaquinaDialog($event)">
+          Selecionar Máquinas
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Equipamentos</mat-label>
+        <ul>
+          <li *ngFor="let equipamento of equipamentos">
+            {{ equipamento.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openEquipamentoDialog($event)">
+          Selecionar Equipamentos
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Veículos</mat-label>
+        <ul>
+          <li *ngFor="let veiculo of veiculos">
+            {{ veiculo.nome }}
+          </li>
+        </ul>
+        <button mat-raised-button color="primary" (click)="openVeiculoDialog($event)">
+          Selecionar Veículos
+        </button>
+      </div>
+
+      <mat-form-field class="full-width form-inline-field">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="observacoes"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Editar Colheita
+        </button>
+        <a
+          mat-raised-button
+          color="primary"
+          href="/dashboard/atividades/colheitas"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

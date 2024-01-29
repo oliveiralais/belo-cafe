@@ -1,0 +1,88 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Financeiro</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/vendas" class="page-subtitle">Gerenciamento de Vendas</a>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/vendas/new" class="page-subtitle">Registrar Nova Venda</a>
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">shopping_bag</mat-icon>
+        Registro de Venda
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="vendaFormGroup" (submit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Data da venda</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: 10/11/2023"
+          pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}"
+          type="text"
+          formControlName="data"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="vendaFormGroup.get('data')?.errors?.['required'] && vendaFormGroup.get('data')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="vendaFormGroup.get('data')?.errors?.['pattern'] && vendaFormGroup.get('titulo')?.touched"
+          >O formato da data deve ser DD/MM/AAAA
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Valor da venda</mat-label>
+        <input
+          matInput
+          placeholder="Ex.: 1000,00"
+          type="text"
+          formControlName="valor"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="vendaFormGroup.get('descricao')?.errors?.['required'] && vendaFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Quantidade de Café da venda em Kg.</mat-label>
+        <input
+          matInput
+          placeholder=" Ex.: 100"
+          type="text"
+          formControlName="qtdCafe"
+          required
+        />
+
+        <mat-hint
+          class="text-danger"
+          *ngIf="vendaFormGroup.get('data')?.errors?.['required'] && vendaFormGroup.get('titulo')?.touched"
+          >Campo Obrigatório.
+        </mat-hint>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Cadastrar Venda
+        </button>
+        <a mat-raised-button color="primary" href="/dashboard/vendas">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

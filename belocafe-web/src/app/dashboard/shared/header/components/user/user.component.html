@@ -1,0 +1,24 @@
+<div class="user-container">
+  <button class="user-icon-button" mat-mini-fab [matMenuTriggerFor]="userMenu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <div class="user-menu-title">
+      <h4 *ngIf="loggedUser" class="user-menu-title-name">{{loggedUser.name}}</h4>
+      <a *ngIf="loggedUser" class="user-menu-title-property">{{loggedUser.propertyName}}</a>
+    </div>
+    <button mat-menu-item class="user-menu-item">
+      <mat-icon class="user-menu-icon">account_circle</mat-icon>Meu Perfil
+    </button>
+    <button mat-menu-item class="user-menu-item">
+      <mat-icon class="user-menu-icon">settings</mat-icon>Configurações
+    </button>
+    <div class="signout-button-wrapper">
+      <button (click)="handleLogout()" class="signout-button" mat-flat-button>
+        <mat-icon class="user-menu-icon">logout</mat-icon>Sign-out
+      </button>
+    </div>
+  </mat-menu>
+  <span *ngIf="loggedUser" class="user-greeting">Olá, <span class="user-greeting-accent">{{loggedUser.name}}!</span></span>
+</div>
+

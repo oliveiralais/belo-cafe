@@ -1,0 +1,23 @@
+.selection-dialog {
+  padding: 15px 30px;
+  height: 400px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.page-title {
+  margin: 20px 0px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.selection-dialog-actions {
+  margin-top: auto;
+}

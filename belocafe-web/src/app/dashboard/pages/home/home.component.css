@@ -1,0 +1,61 @@
+.charts-section, .summary-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.chart {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.chart-title {
+  color: grey;
+  font-family: 'Montserrat', sans-serif;
+  margin: 10px 0px 10px 10px;
+}
+
+.summary-card {
+  margin-bottom: 25px;
+  color: grey;
+}
+
+.summary-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px 10px 0px;
+}
+
+.summary-value {
+  font-size: 3rem;
+}
+
+.summary-icon {
+  transform: scale(3);
+}
+
+
+@media (min-width: 1024px) {
+  .chart {
+    width: 49%;
+  }
+  .summary-card {
+    width: 23.60%;
+  }
+  .charts-section {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .summary-card {
+    width: 49%;
+  }
+}
+
+@media (max-width: 767px) {
+  .summary-card {
+    width: 100%;
+  }
+}

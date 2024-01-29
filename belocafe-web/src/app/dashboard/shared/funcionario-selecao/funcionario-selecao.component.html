@@ -1,0 +1,56 @@
+<div class="selection-dialog">
+  <h2 class="page-title">Seleção de Funcionários</h2>
+
+  <div class="table-container">
+    <mat-table [dataSource]="data.funcionarios">
+      <!-- Coluna de seleção -->
+      <ng-container matColumnDef="selecionar">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="toggleAllSelection($event)"
+            [checked]="verifyAllSelection()"
+          ></mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let funcionario">
+          <mat-checkbox
+            (change)="toggleSelection(funcionario)"
+            [checked]="verifySelection(funcionario)"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Outras colunas -->
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let funcionario">{{
+          funcionario.nome
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="funcao">
+        <mat-header-cell *matHeaderCellDef>Função</mat-header-cell>
+        <mat-cell *matCellDef="let funcionario">{{
+          funcionario.funcao
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="salario">
+        <mat-header-cell *matHeaderCellDef>Salário</mat-header-cell>
+        <mat-cell *matCellDef="let funcionario">{{
+          funcionario.salario.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+          })
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Adicione mais colunas conforme necessário -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="actions selection-dialog-actions">
+    <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+  </div>
+</div>

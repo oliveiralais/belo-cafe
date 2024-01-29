@@ -1,0 +1,35 @@
+<button class="notification-button" mat-icon-button [matMenuTriggerFor]="bell">
+  <mat-icon matBadge="4" matBadgeColor="warn">notifications</mat-icon>
+</button>
+<mat-menu #bell="matMenu">
+  <button mat-menu-item>
+    <mat-icon>trending_up</mat-icon>
+    <span>Seu relatório semanal</span>
+  </button>
+  <button mat-menu-item >
+    <mat-icon>payments</mat-icon>
+    <span>Seu fluxo de caixa diário</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>grass</mat-icon>
+    <span>Custos e receita por gleba</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Desabilitar alertas</span>
+  </button>
+</mat-menu>
+<button class="notification-button" mat-icon-button [matMenuTriggerFor]="mail">
+  <mat-icon matBadge="2" matBadgeColor="warn">mail</mat-icon>
+</button>
+<mat-menu #mail="matMenu">
+  <button mat-menu-item>
+    <mat-icon>info</mat-icon>
+    <span>Bem-vindo ao Belo Café!</span>
+  </button>
+  <button mat-menu-item >
+    <mat-icon>help</mat-icon>
+    <span>Precisa de ajuda?</span>
+  </button>
+</mat-menu>
+

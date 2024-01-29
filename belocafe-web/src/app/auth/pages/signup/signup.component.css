@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.signin-card {
+  padding: 20px;
+  align-items: center;
+}
+
+.signin-card-title {
+  color: #241a18;
+  display: flex;
+  align-items: center;
+  font-size: 1.75rem;
+}
+
+.signin-card-title-icon {
+  margin-right: 20px;
+  transform: scale(2);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.signin-form {
+  margin-top: 25px;
+}
+
+.actions-container {
+  margin-top: 10px;
+}
+
+.uf-input, .city-input, .password-input {
+  width: 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+  .city-state-container {
+    display: flex;
+  }
+
+  .city-input {
+    flex-grow: 2;
+    margin-left: 20px;
+  }
+
+  .password-container {
+    display: flex;
+  }
+
+  .password-input:nth-child(1) {
+    margin-right: 20px;
+    flex-grow: 1;
+  }
+}

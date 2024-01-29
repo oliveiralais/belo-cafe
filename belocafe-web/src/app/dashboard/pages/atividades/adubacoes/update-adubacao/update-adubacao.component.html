@@ -1,0 +1,250 @@
+<mat-toolbar class="page-header">
+  <span class="page-title">Produção</span>
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/adubacoes" class="page-subtitle"
+    >Gerenciamento de Adubações</a
+  >
+  <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+  <a href="/dashboard/atividades/adubacoes/update" class="page-subtitle"
+    >Editar Adubação</a
+  >
+</mat-toolbar>
+
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="form-card-title">
+        <mat-icon class="form-card-title-icon">compost</mat-icon>
+        Edição de Adubação
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="adubacaoFormGroup" (submit)="onSubmit()">
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Insumo</mat-label>
+          <mat-select matInput name="insumo" formControlName="insumo" required>
+            <mat-option *ngFor="let insumo of insumos" [value]="insumo">
+              {{ insumo.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('insumo')?.errors?.['required'] && adubacaoFormGroup.get('insumo')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Qtde. Insumo</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10000"
+            type="text"
+            formControlName="qtdeInsumo"
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('qtdeInsumo')?.errors?.['required'] && adubacaoFormGroup.get('qtdeInsumo')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('qtdeInsumo')?.errors?.['min'] && adubacaoFormGroup.get('qtdeInsumo')?.touched"
+            >O valor inserido deve ser maior ou igual a 0.</mat-hint
+          >
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('qtdeInsumo')?.errors?.['max'] && adubacaoFormGroup.get('qtdeInsumo')?.touched"
+          >
+            O valor inserido deve ser menor ou igual a quantidade disponível:
+            {{
+              adubacaoFormGroup.get("insumo")!.value === insumoInicial
+                ? adubacaoFormGroup.get("insumo")!.value.quantidadeDisponivel +
+                  qtdeInsumoInicial
+                : adubacaoFormGroup.get("insumo")!.value.quantidadeDisponivel
+            }}.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Despesas Extras (R$)</mat-label>
+          <input
+            matInput
+            placeholder="Ex: 10000"
+            type="text"
+            formControlName="despesasExtras"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('despesasExtras')?.errors?.['min'] && adubacaoFormGroup.get('despesasExtras')?.touched"
+            >O valor inserido deve ser menor ou igual a 0.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Ocorrência Ano</mat-label>
+          <mat-select
+            matInput
+            name="ocorrenciaAno"
+            formControlName="ocorrenciaAno"
+            required
+          >
+            <mat-option [value]="1"> 1 </mat-option>
+            <mat-option [value]="2"> 2 </mat-option>
+            <mat-option [value]="3"> 3 </mat-option>
+            <mat-option [value]="4"> 4 </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('ocorrenciaAno')?.errors?.['required'] && adubacaoFormGroup.get('ocorrenciaAno')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Início</mat-label>
+          <input matInput type="date" formControlName="dataInicio" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('dataInicio')?.errors?.['required'] && adubacaoFormGroup.get('dataInicio')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Data Fim</mat-label>
+          <input matInput type="date" formControlName="dataFim" required />
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('dataFim')?.errors?.['required'] && adubacaoFormGroup.get('dataFim')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline-fields">
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Status</mat-label>
+          <mat-select
+            matInput
+            name="statusAtividade"
+            formControlName="statusAtividade"
+            required
+          >
+            <mat-option
+              *ngFor="let statusAtividade of statusAtividades"
+              [value]="statusAtividade"
+            >
+              {{ statusAtividade.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('statusAtividade')?.errors?.['required'] && adubacaoFormGroup.get('statusAtividade')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width form-inline-field">
+          <mat-label>Local</mat-label>
+          <mat-select matInput name="local" formControlName="local" required>
+            <mat-option *ngFor="let local of glebas" [value]="local">
+              {{ local.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            class="text-danger"
+            *ngIf="adubacaoFormGroup.get('local')?.errors?.['required'] && adubacaoFormGroup.get('local')?.touched"
+            >Campo obrigatório.</mat-hint
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Funcionários</mat-label>
+        <ul>
+          <li *ngFor="let funcionario of funcionarios">
+            {{ funcionario.nome }}
+          </li>
+        </ul>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openFuncionarioDialog($event)"
+        >
+          Selecionar Funcionários
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Máquinas</mat-label>
+        <ul>
+          <li *ngFor="let maquina of maquinas">
+            {{ maquina.nome }}
+          </li>
+        </ul>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openMaquinaDialog($event)"
+        >
+          Selecionar Máquinas
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Equipamentos</mat-label>
+        <ul>
+          <li *ngFor="let equipamento of equipamentos">
+            {{ equipamento.nome }}
+          </li>
+        </ul>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openEquipamentoDialog($event)"
+        >
+          Selecionar Equipamentos
+        </button>
+      </div>
+
+      <div class="selection-container">
+        <mat-label>Veículos</mat-label>
+        <ul>
+          <li *ngFor="let veiculo of veiculos">
+            {{ veiculo.nome }}
+          </li>
+        </ul>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openVeiculoDialog($event)"
+        >
+          Selecionar Veículos
+        </button>
+      </div>
+
+      <mat-form-field class="full-width form-inline-field">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="observacoes"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          Editar Adubação
+        </button>
+        <a
+          mat-raised-button
+          color="primary"
+          href="/dashboard/atividades/adubacoes"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

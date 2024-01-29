@@ -1,0 +1,29 @@
+<header>
+  <app-header (showSidebar)="sidenav.toggle($event)" [isSidenavOpened]="showSidebar"></app-header>
+</header>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [(opened)]="showSidebar"
+    class="sidenav"
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches"
+  >
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer>
+      <app-footer></app-footer>
+    </footer>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,107 @@
+<div class="home-section">
+  <mat-toolbar class="page-header">
+    <span class="page-title">Dashboard</span>
+    <mat-icon class="page-title-icon"> chevron_right </mat-icon>
+    <a href="/" class="page-subtitle">Página Inicial</a>
+  </mat-toolbar>
+
+  <div class="summary-section">
+    <div class="summary-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="summary-title"> Glebas </span>
+          </mat-card-title>
+          <div class="summary-content">
+            <span class="summary-value"> {{glebaCount}} </span>
+            <mat-icon class="summary-icon"> grass </mat-icon>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="summary-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="summary-title"> Funcionários </span>
+          </mat-card-title>
+          <div class="summary-content">
+            <span class="summary-value"> {{funcionarioCount}} </span>
+            <mat-icon class="summary-icon"> account_circle </mat-icon>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="summary-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="summary-title"> Insumos </span>
+          </mat-card-title>
+          <div class="summary-content">
+            <span class="summary-value"> {{insumoCount}} </span>
+            <mat-icon class="summary-icon"> compost </mat-icon>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="summary-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="summary-title"> Atividades </span>
+          </mat-card-title>
+          <div class="summary-content">
+            <span class="summary-value"> {{atividadeCount}} </span>
+            <mat-icon class="summary-icon"> calendar_month </mat-icon>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="charts-section">
+    <div class="chart">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="chart-title"> Custo previsto de todas as atividades (R$) por mês </span>
+          </mat-card-title>
+          <div echarts [options]="chartOption" class="demo-chart"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="chart-title"> Atividades realizadas por mês </span>
+          </mat-card-title>
+          <div echarts [options]="barChartOption" class="demo-chart"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="chart-title"> Divisão de atividades (ano) </span>
+          </mat-card-title>
+          <div echarts [options]="pieChartOption" class="demo-chart"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>
+            <span class="chart-title"> Custo previsto por gleba (R$/ano) </span>
+          </mat-card-title>
+          <div echarts [options]="barChartOption2" class="demo-chart"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
